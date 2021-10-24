@@ -58,6 +58,11 @@ $ geth --allow-insecure-unlock --unlock --http --http.port 8545 --http.api "web3
 > myContract        //addressにアドレスが付加されていればOK
 ```
 ## 4.署名生成,署名検証を実施するpyファイルを実行
+実行前にsign.pyを修正
+24行目：keystore以下に生成された"UTC~"で始まるファイル目に置き換え
+
+50行目：myContractに付加されたアドレスに置き換え
+
 ※terminalをもう一つ開き,eth_private_net以下でコマンドを実行
 ```bash
 $ python ./src/py/sign.py
