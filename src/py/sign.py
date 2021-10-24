@@ -85,9 +85,9 @@ if gas_estimate < 100000:
         
         #署名者のアドレスと復元されたアドレスが一致するか確認
         if(web3.eth.accounts[0] == recover_address):
-                print("The addresses match. Varification OK")
+                print("Addresses match. Varification OK")
         else:
-                print("The addresses match. Varification OK")
+                print("Addresses do not match. Varification NG")
         
 else:
      print("Gas cost exceeds 100000")
