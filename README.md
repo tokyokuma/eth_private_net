@@ -3,7 +3,9 @@
 
 ## 環境
 OS : Ubuntu20.04
+
 Geth : 1.10.11-stable
+
 言語 : python3,solidity
 
 ## 準備
@@ -12,7 +14,6 @@ $ git clone https://github.com/tokyokuma/eth_private_net.git
 $ cd eth_private_net/
 ```
 ## 手順
-## 1.
 ## 1.Gethをプライベートネットで起動
 
 ### genesisブロックの初期化
@@ -31,7 +32,7 @@ $ geth --networkid "15" --nodiscover --datadir ./ console 2>> ./geth_err.log
 > exit
 ```
 
-### コントラクトコードをコンパイルしbinとabiを取得
+## 2.コントラクトコードをコンパイルしbinとabiを取得
 ```bash
 $ solc --abi --bin src/solc/contract_sign.sol
 Binary:
@@ -40,7 +41,7 @@ Contract JSON ABI
 [{"inputs":[{"internalType":"bytes32","name":"msgh","type":"bytes32"},{"internalType":"uint8","name":"v","type":"uint8"},{"internalType":"bytes32","name":"r","type":"bytes32"},{"internalType":"bytes32","name":"s","type":"bytes32"}],"name":"ecr","outputs":[{"internalType":"address","name":"sender","type":"address"}],"stateMutability":"pure","type":"function"}]
 ```
 
-### 作成したアカウントのロックを解除/web3.pyから操作可能にしてgethを起動
+## 3.作成したアカウントのロックを解除/web3.pyから操作可能にしてgethを起動
 ```bash
 $ geth --allow-insecure-unlock --unlock --http --http.port 8545 --http.api "web3,eth,net,personal" --http.corsdomain "*" --http.addr "0.0.0.0" --datadir ./ --nodiscover --networkid 15 console 2>> geth_err.log
 ※Password:test パスワードの入力を要求される
@@ -56,15 +57,19 @@ $ geth --allow-insecure-unlock --unlock --http --http.port 8545 --http.api "web3
 > miner.start()     //
 > myContract        //addressにアドレスが付加されていればOK
 ```
-### 署名生成,署名検証を実施するpyファイルを実行
+## 4.署名生成,署名検証を実施するpyファイルを実行
 ※terminalをもう一つ開き,eth_private_net以下でコマンドを実行
 ```bash
 $ python ./src/py/sign.py
 ```
 署名者アドレスとecrecoverにより復元されたアドレスが一致していれば
+```bash
 The addresses match. Varification OK
+```
 一致していなければ
+```bash
 The addresses match. Varification OK
+```
 が出力される
 
 ※注意
